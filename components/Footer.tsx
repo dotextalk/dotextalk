@@ -4,6 +4,7 @@ import {
   Facebook,
   Instagram,
   Linkedin,
+  Mail,
   MessageCircle,
 } from "lucide-react";
 
@@ -30,7 +31,7 @@ export default function Footer() {
     <footer className="border-t border-white/10 bg-black text-white">
       <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8 lg:py-20">
         {/* TOP */}
-        <div className="grid gap-12 lg:grid-cols-[1.5fr_1fr_1fr]">
+        <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
           {/* BRAND */}
           <div>
             <Link href="/" className="text-2xl font-bold tracking-tight">
@@ -85,6 +86,33 @@ export default function Footer() {
                 className="ml-1 text-xs font-semibold text-zinc-500 transition hover:text-white"
               >
                 Trustpilot
+              </a>
+            </div>
+          </div>
+
+          {/* CONTACT */}
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-blue-500">
+              Contact
+            </p>
+
+            <div className="mt-6 flex flex-col gap-4">
+              <a
+                href="mailto:hello@dotextalk.com"
+                className="inline-flex w-fit items-center gap-2 text-sm text-zinc-500 transition hover:text-white"
+              >
+                <Mail size={16} />
+                hello@dotextalk.com
+              </a>
+
+              <a
+                href="https://wa.me/918157813455"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex w-fit items-center gap-2 text-sm text-zinc-500 transition hover:text-white"
+              >
+                <MessageCircle size={16} />
+                +91 81578 1355
               </a>
             </div>
           </div>
