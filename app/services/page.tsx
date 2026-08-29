@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {
   Globe,
   Search,
@@ -10,6 +11,7 @@ import {
 const services = [
   {
     number: "01",
+    slug: "web-architecture",
     title: "Web Architecture",
     description:
       "Scalable, high-performance websites and digital platforms built around your business goals.",
@@ -23,6 +25,7 @@ const services = [
   },
   {
     number: "02",
+    slug: "seo-ai-visibility",
     title: "SEO & AI Visibility",
     description:
       "Technical SEO and AI-focused content architecture designed to improve how your brand is discovered.",
@@ -36,6 +39,7 @@ const services = [
   },
   {
     number: "03",
+    slug: "digital-solutions",
     title: "Digital Solutions",
     description:
       "Custom digital systems that connect your business, customers, data and workflows.",
@@ -49,6 +53,7 @@ const services = [
   },
   {
     number: "04",
+    slug: "growth-strategy",
     title: "Growth Strategy",
     description:
       "Data-driven digital strategies that turn online presence into measurable business growth.",
@@ -122,9 +127,10 @@ export default function ServicesPage() {
             const Icon = service.icon;
 
             return (
-              <article
+              <Link
                 key={service.number}
-                className="group relative bg-black p-8 transition-colors duration-300 hover:bg-zinc-950 lg:p-12"
+                href={`/services/${service.slug}`}
+                className="group relative block bg-black p-8 transition-colors duration-300 hover:bg-zinc-950 lg:p-12"
               >
 
                 {/* NUMBER */}
@@ -187,7 +193,7 @@ export default function ServicesPage() {
                   />
                 </div>
 
-              </article>
+              </Link>
             );
           })}
 
