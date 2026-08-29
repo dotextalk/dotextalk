@@ -112,7 +112,7 @@ export default function Footer() {
                 className="inline-flex w-fit items-center gap-2 text-sm text-zinc-500 transition hover:text-white"
               >
                 <MessageCircle size={16} />
-                +91 81578 1355
+                +91 81578 14355
               </a>
             </div>
           </div>
