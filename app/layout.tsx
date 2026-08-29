@@ -69,6 +69,36 @@ export const metadata: Metadata = {
   },
 };
 
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: "DOTEX.TALK",
+  url: siteUrl,
+  email: "info@dotextalk.com",
+  description:
+    "Digital development and solutions studio providing web architecture, SEO and AI visibility, digital solutions and growth strategy.",
+  areaServed: [
+    {
+      "@type": "City",
+      name: "Malappuram",
+    },
+    {
+      "@type": "State",
+      name: "Kerala",
+    },
+    {
+      "@type": "Country",
+      name: "India",
+    },
+  ],
+  serviceType: [
+    "Web Architecture",
+    "SEO & AI Visibility",
+    "Digital Solutions",
+    "Growth Strategy",
+  ],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -76,6 +106,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en-IN">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(structuredData),
+          }}
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} min-h-screen bg-black text-white antialiased`}
       >
