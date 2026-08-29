@@ -123,7 +123,7 @@ export default function ArchitectPage() {
 
                 <div className="absolute bottom-0 left-0 right-0 border-t border-white/10 bg-black/70 p-5 backdrop-blur-md">
                   <p className="text-xs font-semibold uppercase tracking-[0.25em] text-blue-500">
-                    DOTEX.TALK
+                    ARSHAD SABU P
                   </p>
 
                   <p className="mt-1 text-sm text-zinc-300">
