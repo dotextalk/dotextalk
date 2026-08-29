@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import {
   ArrowLeft,
@@ -6,7 +7,6 @@ import {
   Search,
   Code2,
   Layers3,
-  CheckCircle2,
   Gauge,
   Database,
   Smartphone,
@@ -246,6 +246,59 @@ type Props = {
   }>;
 };
 
+type ServiceSlug = keyof typeof services;
+
+const serviceMetadata: Record<ServiceSlug, { title: string; description: string }> = {
+  "web-architecture": {
+    title: "Web Architecture & Development in Malappuram, Kerala | DOTEX.TALK",
+    description:
+      "High-performance Next.js websites, business websites and scalable web applications built by DOTEX.TALK in Malappuram, Kerala.",
+  },
+  "seo-ai-visibility": {
+    title: "SEO & AI Visibility Services in Malappuram, Kerala | DOTEX.TALK",
+    description:
+      "Technical SEO, structured data, AI search visibility and analytics to help businesses in Malappuram and Kerala become easier to discover online.",
+  },
+  "digital-solutions": {
+    title: "Digital Solutions & Web Applications in Kerala | DOTEX.TALK",
+    description:
+      "Custom web applications, dashboards, API integrations, databases and automation systems designed for businesses and organizations in Kerala.",
+  },
+  "growth-strategy": {
+    title: "Digital Growth Strategy in Malappuram, Kerala | DOTEX.TALK",
+    description:
+      "Practical digital strategy, conversion optimization, analytics and growth planning to turn your online presence into measurable business growth.",
+  },
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const metadata = serviceMetadata[slug as ServiceSlug];
+
+  if (!metadata) {
+    return {
+      title: "Services | DOTEX.TALK",
+      description:
+        "Digital development, SEO, digital solutions and growth services from DOTEX.TALK.",
+    };
+  }
+
+  return {
+    title: metadata.title,
+    description: metadata.description,
+    alternates: {
+      canonical: `/services/${slug}`,
+    },
+    openGraph: {
+      title: metadata.title,
+      description: metadata.description,
+      url: `https://dotextalk.com/services/${slug}`,
+      siteName: "DOTEX.TALK",
+      type: "website",
+    },
+  };
+}
+
 export default async function ServicePage({ params }: Props) {
   const { slug } = await params;
 
@@ -370,7 +423,7 @@ export default async function ServicePage({ params }: Props) {
 
       {/* =====================================================
           WHAT WE DELIVER
-      ===================================================== */}
+      ===================================================== */
 
       <section className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
 
@@ -442,7 +495,7 @@ export default async function ServicePage({ params }: Props) {
 
       {/* =====================================================
           TECHNOLOGY
-      ===================================================== */}
+      ===================================================== */
 
       <section className="border-y border-white/10">
 
@@ -485,7 +538,7 @@ export default async function ServicePage({ params }: Props) {
 
       {/* =====================================================
           APPROACH
-      ===================================================== */}
+      ===================================================== */
 
       <section className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
 
