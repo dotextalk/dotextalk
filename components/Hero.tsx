@@ -19,9 +19,14 @@ export default function Hero() {
         </h1>
 
         {/* Description */}
-        <p className="max-w-2xl mx-auto text-gray-400 text-sm md:text-lg leading-relaxed mb-10 font-light">
+        <p className="max-w-2xl mx-auto text-gray-400 text-sm md:text-lg leading-relaxed mb-6 font-light">
           Engineering digital infrastructures that dominate search engines
           and AI response engines like ChatGPT.
+        </p>
+
+        {/* Local positioning */}
+        <p className="text-gray-500 text-xs md:text-sm tracking-wide mb-10">
+          Digital development and web solutions from Malappuram, Kerala.
         </p>
 
         {/* Buttons */}
