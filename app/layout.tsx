@@ -73,8 +73,8 @@ const structuredData = {
   "@context": "https://schema.org",
   "@type": "Organization",
   "@id": `${siteUrl}/#organization`,
-  name: "DOTEX.TALK",
-  alternateName: "DOTEX TALK",
+  name: "DOTEXTALK",
+  alternateName: "DOTEX.TALK",
   url: siteUrl,
   email: "info@dotextalk.com",
   description:
