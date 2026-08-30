@@ -92,11 +92,11 @@ export default function Navbar() {
         id="site-navigation-drawer"
         aria-label="Site navigation"
         aria-hidden={!open}
-        className={`fixed right-0 top-0 z-[60] flex h-dvh w-[min(88vw,500px)] flex-col border-l border-white/10 bg-zinc-950/95 px-7 pb-8 pt-28 shadow-2xl shadow-black/40 backdrop-blur-xl transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:px-10 ${
+        className={`fixed right-0 top-0 z-[60] flex h-dvh min-w-0 w-[min(90vw,460px)] flex-col overflow-hidden border-l border-white/10 bg-zinc-950/95 px-7 pb-8 pt-28 shadow-2xl shadow-black/40 backdrop-blur-xl transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:px-10 ${
           open ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="flex-1 overflow-y-auto">
+        <div className="min-w-0 flex-1 overflow-y-auto overflow-x-hidden pr-1 drawer-scroll">
           <div className="mb-10 border-b border-white/10 pb-6">
             <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-zinc-500">
               Navigation
@@ -106,11 +106,11 @@ export default function Navbar() {
             </p>
           </div>
 
-          <div className="flex flex-col">
+          <div className="flex min-w-0 flex-col">
             <Link
               href="/"
               onClick={closeMenu}
-              className="group border-b border-white/10 py-4 text-2xl font-medium tracking-tight text-zinc-200 transition-colors duration-300 hover:text-white sm:text-3xl"
+              className="border-b border-white/10 py-4 text-2xl font-medium tracking-tight text-zinc-200 transition-colors duration-300 hover:text-white sm:text-3xl"
             >
               HOME
             </Link>
@@ -120,7 +120,7 @@ export default function Navbar() {
                 key={link.href}
                 href={link.href}
                 onClick={closeMenu}
-                className="group border-b border-white/10 py-4 text-2xl font-medium tracking-tight text-zinc-200 transition-colors duration-300 hover:text-white sm:text-3xl"
+                className="border-b border-white/10 py-4 text-2xl font-medium tracking-tight text-zinc-200 transition-colors duration-300 hover:text-white sm:text-3xl"
               >
                 {link.label}
               </Link>
@@ -132,16 +132,24 @@ export default function Navbar() {
                 aria-expanded={servicesOpen}
                 aria-controls="services-submenu"
                 onClick={() => setServicesOpen((value) => !value)}
-                className="flex w-full items-center justify-between py-4 text-left text-2xl font-medium tracking-tight text-zinc-200 transition-colors duration-300 hover:text-white sm:text-3xl"
+                className="flex w-full items-center justify-between gap-4 py-4 text-left text-2xl font-medium tracking-tight text-zinc-200 transition-colors duration-300 hover:text-white sm:text-3xl"
               >
                 <span>SERVICES</span>
                 <span
-                  className={`flex h-8 w-8 items-center justify-center rounded-full border border-white/10 text-sm transition-transform duration-300 ${
-                    servicesOpen ? "rotate-45" : "rotate-0"
+                  className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/10 transition-transform duration-300 ${
+                    servicesOpen ? "rotate-180" : "rotate-0"
                   }`}
                   aria-hidden="true"
                 >
-                  +
+                  <svg
+                    viewBox="0 0 20 20"
+                    className="h-4 w-4"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                  >
+                    <path d="M5 7.5 10 12.5 15 7.5" />
+                  </svg>
                 </span>
               </button>
 
@@ -151,18 +159,18 @@ export default function Navbar() {
                   servicesOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
                 }`}
               >
-                <div className="overflow-hidden">
+                <div className="min-w-0 overflow-hidden">
                   <div className="pb-4 pl-1">
                     {services.map((service, index) => (
                       <Link
                         key={service.href}
                         href={service.href}
                         onClick={closeMenu}
-                        className="group flex items-center gap-4 py-3 text-sm font-medium tracking-wide text-zinc-400 transition-all duration-300 hover:translate-x-1 hover:text-white"
+                        className="group flex min-w-0 items-center gap-4 py-3 text-sm font-medium tracking-wide text-zinc-400 transition-all duration-300 hover:translate-x-1 hover:text-white"
                         style={{ transitionDelay: servicesOpen ? `${index * 45}ms` : "0ms" }}
                       >
-                        <span className="text-[10px] text-blue-500">0{index + 1}</span>
-                        <span>{service.label}</span>
+                        <span className="shrink-0 text-[10px] text-blue-500">0{index + 1}</span>
+                        <span className="min-w-0 break-words">{service.label}</span>
                       </Link>
                     ))}
                   </div>
@@ -175,7 +183,7 @@ export default function Navbar() {
                 key={link.href}
                 href={link.href}
                 onClick={closeMenu}
-                className={`group border-b border-white/10 py-4 text-2xl font-medium tracking-tight transition-colors duration-300 sm:text-3xl ${
+                className={`border-b border-white/10 py-4 text-2xl font-medium tracking-tight transition-colors duration-300 sm:text-3xl ${
                   link.accent ? "text-blue-400 hover:text-blue-300" : "text-zinc-200 hover:text-white"
                 }`}
               >
@@ -194,12 +202,31 @@ export default function Navbar() {
           </div>
         </div>
 
-        <div className="mt-6 border-t border-white/10 pt-5 text-[10px] uppercase tracking-[0.2em] text-zinc-600">
+        <div className="mt-6 min-w-0 border-t border-white/10 pt-5 text-[10px] uppercase tracking-[0.2em] text-zinc-600 break-words">
           DOTEX.TALK · Digital Development & Solutions
         </div>
       </aside>
 
       <style jsx global>{`
+        .drawer-scroll {
+          scrollbar-width: thin;
+          scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+        }
+
+        .drawer-scroll::-webkit-scrollbar {
+          width: 5px;
+          height: 0;
+        }
+
+        .drawer-scroll::-webkit-scrollbar-track {
+          background: transparent;
+        }
+
+        .drawer-scroll::-webkit-scrollbar-thumb {
+          background: rgba(255, 255, 255, 0.2);
+          border-radius: 999px;
+        }
+
         @media (prefers-reduced-motion: reduce) {
           #site-navigation-drawer,
           #site-navigation-drawer *,
