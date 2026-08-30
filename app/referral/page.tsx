@@ -683,7 +683,7 @@ export default function ReferralPage() {
                 </p>
 
                 <a
-                  href="https://wa.me/918157813455?text=Hi%20DOTEX.TALK,%20I%20would%20like%20to%20refer%20a%20client."
+                  href="https://wa.me/918157814355?text=Hi%20DOTEX.TALK,%20I%20would%20like%20to%20refer%20a%20client."
                   target="_blank"
                   rel="noopener noreferrer"
                   className="mt-7 inline-flex w-full items-center justify-center gap-3 rounded-full bg-blue-500 px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-blue-400"
