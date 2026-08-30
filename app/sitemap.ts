@@ -5,7 +5,6 @@ const siteUrl = "https://dotextalk.com";
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     "",
-    "/about",
     "/architect",
     "/expertise",
     "/services",
@@ -22,7 +21,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return routes.map((route) => ({
     url: `${siteUrl}${route}`,
-    lastModified: new Date(),
     changeFrequency: route === "" ? "weekly" : "monthly",
     priority: route === "" ? 1 : route.startsWith("/services/") ? 0.9 : 0.7,
   }));
