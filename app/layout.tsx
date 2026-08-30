@@ -71,25 +71,38 @@ export const metadata: Metadata = {
 
 const structuredData = {
   "@context": "https://schema.org",
-  "@type": "ProfessionalService",
+  "@type": "Organization",
+  "@id": `${siteUrl}/#organization`,
   name: "DOTEX.TALK",
+  alternateName: "DOTEX TALK",
   url: siteUrl,
   email: "info@dotextalk.com",
   description:
-    "Digital development and solutions studio providing web architecture, SEO and AI visibility, digital solutions and growth strategy.",
+    "Digital development and solutions studio based in Malappuram, Kerala, providing web architecture, SEO and AI visibility, digital solutions and growth strategy.",
   areaServed: [
     {
-      "@type": "City",
-      name: "Malappuram",
+      "@type": "Place",
+      name: "Morayur, Malappuram, Kerala, India",
+    },
+    {
+      "@type": "AdministrativeArea",
+      name: "Malappuram, Kerala, India",
     },
     {
       "@type": "State",
-      name: "Kerala",
+      name: "Kerala, India",
     },
     {
       "@type": "Country",
       name: "India",
     },
+  ],
+  knowsAbout: [
+    "Web Architecture",
+    "SEO & AI Visibility",
+    "Digital Solutions",
+    "Growth Strategy",
+    "Website Development",
   ],
   serviceType: [
     "Web Architecture",
