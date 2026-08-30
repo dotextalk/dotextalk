@@ -21,7 +21,7 @@ export default function Footer() {
             </p>
             <div className="mt-7 flex flex-wrap items-center gap-4">
               <Link href="/referral" className="inline-flex items-center gap-2 text-sm font-semibold text-zinc-300 transition hover:text-blue-500">Refer a project <ArrowUpRight size={16} /></Link>
-              <a href="https://wa.me/918157813455" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm font-semibold text-zinc-300 transition hover:text-green-400"><MessageCircle size={16} /> WhatsApp</a>
+              <a href="https://wa.me/918157814355" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm font-semibold text-zinc-300 transition hover:text-green-400"><MessageCircle size={16} /> WhatsApp</a>
             </div>
             <div className="mt-8 flex flex-wrap items-center gap-3">
               {socialLinks.map(({ label, href }) => (
@@ -35,7 +35,7 @@ export default function Footer() {
             <p className="text-xs font-semibold uppercase tracking-[0.25em] text-blue-500">Contact</p>
             <div className="mt-6 flex flex-col gap-4">
               <a href="mailto:info@dotextalk.com" className="inline-flex w-fit items-center gap-2 text-sm text-zinc-500 transition hover:text-white"><Mail size={16} /> info@dotextalk.com</a>
-              <a href="https://wa.me/918157813455" target="_blank" rel="noopener noreferrer" className="inline-flex w-fit items-center gap-2 text-sm text-zinc-500 transition hover:text-white"><MessageCircle size={16} /> +91 81578 14355</a>
+              <a href="https://wa.me/918157814355" target="_blank" rel="noopener noreferrer" className="inline-flex w-fit items-center gap-2 text-sm text-zinc-500 transition hover:text-white"><MessageCircle size={16} /> +91 81578 14355</a>
             </div>
           </div>
 
