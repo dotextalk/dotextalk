@@ -1,9 +1,71 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
+
+type Step = "start" | "website" | "seo" | "solution" | "growth" | "other";
+
+const flows: Record<Exclude<Step, "start">, { title: string; message: string; options: string[] }> = {
+  website: {
+    title: "Website",
+    message: "Great. What kind of website are you looking for?",
+    options: ["Business website", "E-commerce website", "Portfolio website", "Custom web application"],
+  },
+  seo: {
+    title: "SEO / AI visibility",
+    message: "We can help improve your search visibility and online presence. Do you already have a website?",
+    options: ["Yes, I have a website", "No, I need one", "I'm not sure"],
+  },
+  solution: {
+    title: "Digital solution",
+    message: "Tell us what you are trying to solve. We can discuss a custom digital solution around your workflow or business needs.",
+    options: ["Business automation", "Custom software", "Government / organisation solution", "Something else"],
+  },
+  growth: {
+    title: "Business growth",
+    message: "What would you like to improve first?",
+    options: ["Website", "SEO / AI visibility", "Digital marketing", "I'm not sure"],
+  },
+  other: {
+    title: "Your project",
+    message: "No problem. Tell us about your requirement and we'll help you find the right direction.",
+    options: ["Contact us", "Start again"],
+  },
+};
 
 export default function LetsTalkButton() {
   const [open, setOpen] = useState(false);
+  const [step, setStep] = useState<Step>("start");
+  const [history, setHistory] = useState<string[]>([]);
+
+  const current = useMemo(() => (step === "start" ? null : flows[step]), [step]);
+
+  const choose = (option: string) => {
+    setHistory((items) => [...items, option]);
+
+    if (option === "Start again") {
+      setStep("start");
+      return;
+    }
+
+    if (option === "Contact us") {
+      window.location.href = "/contact";
+      return;
+    }
+
+    if (step === "start") {
+      if (option === "I need a website") setStep("website");
+      else if (option === "I need SEO / AI visibility") setStep("seo");
+      else if (option === "I need a digital solution") setStep("solution");
+      else if (option === "I want to grow my business") setStep("growth");
+      else setStep("other");
+    }
+  };
+
+  const close = () => {
+    setOpen(false);
+    setStep("start");
+    setHistory([]);
+  };
 
   return (
     <>
@@ -17,22 +79,11 @@ export default function LetsTalkButton() {
           LET&apos;S TALK
         </span>
         <span className="flex h-14 w-14 items-center justify-center rounded-full border border-blue-500/70 bg-black/80 shadow-[0_0_28px_rgba(37,99,235,0.28)] backdrop-blur-md transition-all duration-300 group-hover:border-blue-400 group-hover:shadow-[0_0_34px_rgba(37,99,235,0.42)] sm:h-16 sm:w-16">
-          <svg
-            viewBox="0 0 64 64"
-            className="h-10 w-10 text-blue-500 sm:h-11 sm:w-11"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.4"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            aria-hidden="true"
-          >
+          <svg viewBox="0 0 64 64" className="h-10 w-10 text-blue-500 sm:h-11 sm:w-11" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <path d="M20 27c0-9 5.6-15 12-15s12 6 12 15v6c0 8-5.5 14-12 14s-12-6-12-14v-6Z" />
-            <path d="M20.5 25.5c2.3-6.2 7.2-9.7 13.1-9.7 4.6 0 7.8 1.7 10.1 5.1" />
-            <path d="M22 21c3.2-4.1 7.4-6.3 12.2-6.3" />
+            <path d="M20.5 25.5c2.3-6.2 7.2-9.7 13.1-9.7 4.6 0 7.8 1.7 10.1 5.1M22 21c3.2-4.1 7.4-6.3 12.2-6.3" />
             <path d="M24 31h.1M40 31h.1" strokeWidth="3.2" />
-            <path d="M28 39c2.4 1.9 5.6 1.9 8 0" />
-            <path d="M13 28v7c0 3.4 2.1 6.2 5.1 7.2M51 28v7c0 3.4-2.1 6.2-5.1 7.2" />
+            <path d="M28 39c2.4 1.9 5.6 1.9 8 0M13 28v7c0 3.4 2.1 6.2 5.1 7.2M51 28v7c0 3.4-2.1 6.2-5.1 7.2" />
             <path d="M24 48c-5.3 2.3-8.5 5.3-10.1 9M40 48c5.3 2.3 8.5 5.3 10.1 9" />
           </svg>
         </span>
@@ -40,63 +91,58 @@ export default function LetsTalkButton() {
 
       {open && (
         <div className="fixed inset-0 z-50 flex items-end justify-end bg-black/50 p-4 backdrop-blur-[2px] sm:p-8">
-          <div
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="lets-talk-title"
-            className="w-full max-w-md overflow-hidden rounded-2xl border border-white/10 bg-zinc-950 shadow-2xl shadow-black/60"
-          >
+          <div role="dialog" aria-modal="true" aria-labelledby="lets-talk-title" className="w-full max-w-md overflow-hidden rounded-2xl border border-white/10 bg-zinc-950 shadow-2xl shadow-black/60">
             <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
               <div>
-                <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-blue-500">
-                  DOTEX.TALK
-                </p>
-                <h2 id="lets-talk-title" className="mt-1 text-lg font-semibold text-white">
-                  Let&apos;s Talk
-                </h2>
+                <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-blue-500">DOTEX.TALK</p>
+                <h2 id="lets-talk-title" className="mt-1 text-lg font-semibold text-white">Let&apos;s Talk</h2>
               </div>
-              <button
-                type="button"
-                onClick={() => setOpen(false)}
-                aria-label="Close Let's Talk assistant"
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-zinc-400 transition hover:border-white/20 hover:text-white"
-              >
+              <button type="button" onClick={close} aria-label="Close Let's Talk assistant" className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-zinc-400 transition hover:border-white/20 hover:text-white">
                 <span aria-hidden="true" className="text-xl leading-none">×</span>
               </button>
             </div>
 
-            <div className="px-5 py-6">
+            <div className="max-h-[70vh] overflow-y-auto px-5 py-6">
               <div className="flex items-start gap-3">
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-blue-500/40 text-blue-500">
                   <svg viewBox="0 0 64 64" className="h-7 w-7" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                     <path d="M20 27c0-9 5.6-15 12-15s12 6 12 15v6c0 8-5.5 14-12 14s-12-6-12-14v-6Z" />
-                    <path d="M22 21c3.2-4.1 7.4-6.3 12.2-6.3" />
-                    <path d="M24 31h.1M40 31h.1" strokeWidth="3.2" />
-                    <path d="M28 39c2.4 1.9 5.6 1.9 8 0" />
+                    <path d="M22 21c3.2-4.1 7.4-6.3 12.2-6.3M24 31h.1M40 31h.1M28 39c2.4 1.9 5.6 1.9 8 0" />
                   </svg>
                 </span>
                 <p className="pt-1 text-sm leading-6 text-zinc-300">
-                  Hello! Tell us what you&apos;re looking to build, improve or grow. Our smart assistant will help guide you to the right solution.
+                  {current?.message ?? "Hello! What can we help you build, improve or grow?"}
                 </p>
               </div>
 
+              {history.length > 0 && (
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {history.map((item, index) => (
+                    <span key={`${item}-${index}`} className="rounded-full border border-blue-500/20 bg-blue-500/5 px-3 py-1 text-xs text-blue-300">{item}</span>
+                  ))}
+                </div>
+              )}
+
               <div className="mt-6 grid gap-2">
-                {[
+                {(current?.options ?? [
                   "I need a website",
                   "I need SEO / AI visibility",
                   "I need a digital solution",
                   "I want to grow my business",
-                ].map((option) => (
-                  <button
-                    key={option}
-                    type="button"
-                    onClick={() => setOpen(false)}
-                    className="rounded-xl border border-white/10 bg-white/[0.02] px-4 py-3 text-left text-sm text-zinc-300 transition hover:border-blue-500/40 hover:bg-blue-500/5 hover:text-white"
-                  >
+                  "Something else",
+                ]).map((option) => (
+                  <button key={option} type="button" onClick={() => choose(option)} className="rounded-xl border border-white/10 bg-white/[0.02] px-4 py-3 text-left text-sm text-zinc-300 transition hover:border-blue-500/40 hover:bg-blue-500/5 hover:text-white">
                     {option}
                   </button>
                 ))}
               </div>
+
+              {step !== "start" && (
+                <div className="mt-4 flex gap-3">
+                  <button type="button" onClick={() => setStep("start")} className="text-xs text-zinc-500 transition hover:text-white">← Start over</button>
+                  <a href="/contact" className="text-xs text-blue-400 transition hover:text-blue-300">Contact us →</a>
+                </div>
+              )}
             </div>
           </div>
         </div>
